@@ -1,18 +1,25 @@
+import '../../styles/containers/Navigation.scss'
+
 import React from 'react';
-import { Box } from '@material-ui/core';
-import { Button } from '@material-ui/core';
+import { Box, Button } from '@material-ui/core';
+import NavButton from '../elements/NavButton';
+
 
 
 function Navigation() {
 
     return(
+        <Box boxShadow={2} mx="auto" display="flex" justifyContent="flex-end" alignItems="center" paddingY={1} paddingX={1}>
+            <Box display="flex" justifyContent="space-around" className="navButtons">
+                <NavButton value="Random" />
+                <NavButton value="Submit" />
+            </Box>
 
-        <Box boxShadow={2} mx="auto" display="flex" justifyContent="space-evenly" paddingY={1}>
-            <Button variant="contained" color="default">AAA</Button>
-            <Button variant="contained" color="default">BBB</Button>
-            <Button variant="contained" color="default">BBB</Button>
-            <Button variant="contained" color="default">BBB</Button>
-            <Button variant="contained" color="default">BBB</Button>
+            <Box className="spacer">
+
+            </Box>
+
+            <Button className="admin">Admin Area</Button>
         </Box>
     );
 }
