@@ -1,13 +1,14 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { Box } from "@material-ui/core";
 
-function Content() {
-
-    return( 
-        <Box width="60%" boxShadow="2" m="auto" mt={5}>
-            Ra ra ra
-        </Box>
-    );
+export class Content extends Component {
+    render() {
+        return( 
+            <Box width="60%" boxShadow="2" m="auto" mt={5}>
+                {this.props.children}
+            </Box>
+        )
+    }
 }
 
 export default Content;

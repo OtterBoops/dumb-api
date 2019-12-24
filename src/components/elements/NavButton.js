@@ -3,7 +3,7 @@ import { Button } from '@material-ui/core';
 
 function NavButton (props) {
     return (
-        <Button variant="contained" color="primary" className="navButton">{props.value}</Button>
+        <Button variant="contained" color="default" className="navButton">{props.value}</Button>
     );
 
 }
