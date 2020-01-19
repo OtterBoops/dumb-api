@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
-import { Box } from "@material-ui/core";
+import React, { Component } from 'react'
+import { Box } from "@material-ui/core"
 
 export class Content extends Component {
     render() {
@@ -11,4 +11,4 @@ export class Content extends Component {
     }
 }
 
-export default Content;
+export default Content

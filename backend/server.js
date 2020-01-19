@@ -15,18 +15,31 @@ app.use(bodyParser.json())
 
 mongoose.connect(config.DB_URL , {
     useNewUrlParser: true,
-    useUnifiedTopology: true
+    useUnifiedTopology: true,
+    useFindAndModify: false
 })
 
 const connection = mongoose.connection
 
 connection.once('open', () => 
-    console.log(" connected to the db bro")
+    console.log("Database connection successful")
 )
 
-imageRoutes.route('/list').get((req, res) => 
+imageRoutes.route('/get').get((req, res) => 
     Image.find((err, images) =>
         err ? console.log(err) : res.json(images)
+    )
+)
+
+imageRoutes.route('/get/:id').get((req, res) =>
+    Image.findById(req.params.id)
+    .then(image =>
+        res.status(200).json(
+            image
+        )
+    )
+    .catch(err =>
+        res.status(404).send("Image not found: " + err)    
     )
 )
 
@@ -36,21 +49,27 @@ imageRoutes.route('/insert').post((req, res) => {
     image.save()
         .then(() => 
             res.status(200).json({
-                image: "image added ;^))"
+                image: "Image added"
             })
         )
         .catch(err => 
-            res.status(500).send("You're autistic" + err)
+            res.status(500).send("Error adding image: " + err)
         )
 })
 
 imageRoutes.route('/delete/:id').delete((req, res) => 
-    Image.findByIdAndDelete((err, image) =>
-        err ? console.log(err) : res.json(image)
-    )
+    Image.findByIdAndRemove(req.params.id)
+        .then(() => 
+            res.status(200).json({
+                image: "Image deleted"
+            })
+        )
+        .catch(err =>
+            res.status(500).send("Error deleting image: " + err)
+        )
 )
 
-app.use('/images', imageRoutes);
+app.use('/images', imageRoutes)
 
 app.listen(config.BE_PORT, () => 
     console.log("Server is running on Port: " + config.BE_PORT)

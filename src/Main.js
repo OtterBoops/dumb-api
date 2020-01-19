@@ -1,12 +1,12 @@
-import 'typeface-roboto';
-import './styles/Main.scss';
+import 'typeface-roboto'
+import './styles/Main.scss'
 
-import React from 'react';
-import Container from '@material-ui/core/Container';
+import React from 'react'
+import Container from '@material-ui/core/Container'
 
-import Navigation from './components/containers/Navigation';
-import Content from './components/containers/Content';
-import Footer from './components/containers/Footer';
+import Navigation from './components/containers/Navigation'
+import Content from './components/containers/Content'
+import Footer from './components/containers/Footer'
 
 function Main() {
   return (
@@ -15,7 +15,7 @@ function Main() {
         <Content />
         <Footer />
     </Container>
-  );
+  )
 }
 
-export default Main;
+export default Main

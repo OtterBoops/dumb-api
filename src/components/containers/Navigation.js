@@ -1,14 +1,14 @@
 import '../../styles/containers/Navigation.scss'
 
-import React from 'react';
+import React from 'react'
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom'
-import { Box, Button } from '@material-ui/core';
+import { Box, Button } from '@material-ui/core'
 
-import NavButton from '../elements/NavButton';
+import NavButton from '../elements/NavButton'
 
-import Home from '../Home';
-import Insert from '../Insert';
-import List from '../List';
+import Home from '../Home'
+import Insert from '../Insert'
+import List from '../List'
 
 function Navigation() {
 
@@ -20,16 +20,8 @@ function Navigation() {
                     <Link to="/">
                         <NavButton value="Home" />
                     </Link>
-{/* 
-                    <Link to=>
-                        <NavButton value="Random" />
-                    </Link> */}
-{/* 
-                    <Link>
-                        <NavButton value="Submit" />
-                    </Link> */}
 
-                    <Link to="/list">
+                    <Link to="/get">
                         <NavButton value="List" />
                     </Link>
 
@@ -44,14 +36,13 @@ function Navigation() {
 
                 <Button className="admin">Admin Area</Button>
             </Box>
+
             <Route path="/" exact component={Home} />
-            {/* <Route path="/:id" component={Show} /> */}
-            <Route path="/list" component={List} />
+            <Route path="/get" component={List} />
             <Route path="/insert" component={Insert} />
-            {/* <Route path="/delete" component={Delete} /> */}
 
         </Router>
-    );
+    )
 }
 
-export default Navigation;
+export default Navigation

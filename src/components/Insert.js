@@ -1,38 +1,38 @@
-import React from "react";
-import axios from 'axios';
+import React from "react"
+import axios from 'axios'
 
 import config from '../config/config.js'
-import Content from '../components/containers/Content';
+import Content from '../components/containers/Content'
 
 const BE_URL = config.BE_ADDRESS + ":" + config.BE_PORT + "/images"
 
 export default class Insert extends Content {
     constructor (props) {
-        super(props);
+        super(props)
 
         this.state = {
-            image_name: '',
+            imageName: '',
         }
     }
 
     onChangeImageName = e => 
         this.setState({
-            image_name: e.target.value
+            imageName: e.target.value
         })
     
     onSubmit = e => {
-        e.preventDefault();
+        e.preventDefault()
 
         const newImage = {
-            image_name: this.state.image_name
-        };
+            imageName: this.state.imageName
+        }
 
         axios.post(BE_URL+ '/insert/', newImage)
             .then(res => console.log(res.data))
             .catch(res => console.log(res))
 
         this.setState({
-            image_name: '',
+            imageName: '',
         })
     }
 
@@ -42,7 +42,7 @@ export default class Insert extends Content {
                 <form onSubmit={this.onSubmit}>
                     <div>
                         <label>Thonk: </label>
-                        <input type="text" value={this.state.image_name} onChange={this.onChangeImageName}/>
+                        <input type="text" value={this.state.imageName} onChange={this.onChangeImageName}/>
                     </div>
 
                     <div>

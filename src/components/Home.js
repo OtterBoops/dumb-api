@@ -1,6 +1,6 @@
-import React from "react";
+import React from "react"
 
-import Content from '../components/containers/Content';
+import Content from '../components/containers/Content'
 
 export default class Home extends Content {
     
