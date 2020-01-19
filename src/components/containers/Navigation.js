@@ -1,29 +1,33 @@
 import '../../styles/containers/Navigation.scss'
 
 import React from 'react';
-import { BrowserRouter as Router, Route, Link } from "react-router-dom"
+import { BrowserRouter as Router, Route, Link } from 'react-router-dom'
 import { Box, Button } from '@material-ui/core';
 
 import NavButton from '../elements/NavButton';
-import List from '../List';
+
+import Home from '../Home';
 import Insert from '../Insert';
-import Delete from '../Delete';
-import Edit from '../Edit';
-import Show from '../Show';
+import List from '../List';
 
 function Navigation() {
 
     return(
         <Router>
-            <Box boxShadow={2} mx="auto" display="flex" justifyContent="flex-end" alignItems="center" paddingY={1} paddingX={1}>
+            <Box boxShadow={2} mx="auto" display="flex" justifyContent="flex-end" alignItems="center" paddingY={1} marginTop={1} paddingX={2}>
                 <Box display="flex" justifyContent="space-around" className="navButtons">
-                    <Link>
-                        <NavButton value="Random" />
-                    </Link>
 
+                    <Link to="/">
+                        <NavButton value="Home" />
+                    </Link>
+{/* 
+                    <Link to=>
+                        <NavButton value="Random" />
+                    </Link> */}
+{/* 
                     <Link>
                         <NavButton value="Submit" />
-                    </Link>
+                    </Link> */}
 
                     <Link to="/list">
                         <NavButton value="List" />
@@ -31,10 +35,6 @@ function Navigation() {
 
                     <Link to="/insert">
                         <NavButton value="Insert" />
-                    </Link>
-
-                    <Link to="/edit">
-                        <NavButton value="Edit" />
                     </Link>
                 </Box>
 
@@ -44,11 +44,11 @@ function Navigation() {
 
                 <Button className="admin">Admin Area</Button>
             </Box>
-            <Route path="/show/:id" component={Show} />
+            <Route path="/" exact component={Home} />
+            {/* <Route path="/:id" component={Show} /> */}
             <Route path="/list" component={List} />
             <Route path="/insert" component={Insert} />
-            <Route path="/edit/:id" component={Edit} />
-            <Route path="/delete" component={Delete} />
+            {/* <Route path="/delete" component={Delete} /> */}
 
         </Router>
     );
