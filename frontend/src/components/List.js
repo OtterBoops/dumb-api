@@ -1,18 +1,23 @@
 import React from "react"
 import axios from "axios"
 
-import config from '../config/config.js'
 import Image from './elements/Image'
 import Content from '../components/containers/Content'
 
-const BE_URL = config.BE_ADDRESS + ":" + config.BE_PORT + "/images"
+require('dotenv').config({
+    path: '../config/.env'
+})
+
+const BE_URL = process.env.BE_ADDRESS + ":" + process.env.BE_PORT + "/images"
 
 export default class List extends Content {
 
     constructor(props) {
         super(props)
 
-        this.state = {images: []}
+        this.state = {
+            images: [],
+        }
     }
 
     componentDidMount() {
@@ -27,9 +32,9 @@ export default class List extends Content {
 
     handleInspect = (id) => {
         axios.get(BE_URL + '/get/' + id)
-        .then(res =>
-            console.log(res.data)
-        )
+        .then(res => {
+            console.log(res.data);
+        })
         .catch(err =>
             console.log("Unable to find image" + err)
         )
@@ -49,7 +54,7 @@ export default class List extends Content {
         return(
             <Content>
                 {this.state.images.map((image, i) => 
-                    <Image className="Image" image={image} key={i} onInspect={this.handleInspect} onDelete={this.handleDelete} />
+                    <Image className="Image" image={image} key={i} onInspect={this.handleInspect} />
                 )}
             </Content>
         )

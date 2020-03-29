@@ -4,7 +4,7 @@ import { Box } from "@material-ui/core"
 export class Content extends Component {
     render() {
         return( 
-            <Box width="100%" boxShadow="2" m="auto" mt={5}>
+            <Box width="70%" boxShadow="2" m="auto" mt={5}>
                 {this.props.children}
             </Box>
         )

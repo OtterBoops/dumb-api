@@ -2,7 +2,7 @@ import '../../styles/containers/Navigation.scss'
 
 import React from 'react'
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom'
-import { Box, Button } from '@material-ui/core'
+import { Box } from '@material-ui/core'
 
 import NavButton from '../elements/NavButton'
 
@@ -33,8 +33,6 @@ function Navigation() {
                 <Box className="spacer">
 
                 </Box>
-
-                <Button className="admin">Admin Area</Button>
             </Box>
 
             <Route path="/" exact component={Home} />

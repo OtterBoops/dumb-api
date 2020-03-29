@@ -1,3 +1,4 @@
+
 const express = require('express')
 const app = express()
 const imageRoutes = express.Router()
@@ -6,23 +7,28 @@ const bodyParser = require('body-parser')
 const cors = require('cors')
 const mongoose = require('mongoose')
 
-const config = require('../src/config/config.js')
+let Image = require('./models/image.model.js')
 
-let Image = require('./image.model.js')
+require('dotenv').config({
+    path: '../config/.env'
+})
 
 app.use(cors())
 app.use(bodyParser.json())
 
-mongoose.connect(config.DB_URL , {
+mongoose.connect(process.env.DB_URL , {
+    user: process.env.DB_USER,
+    password: process.env.DB_PASSWORD,
+
     useNewUrlParser: true,
     useUnifiedTopology: true,
     useFindAndModify: false
 })
-
-const connection = mongoose.connection
-
-connection.once('open', () => 
+.then(
     console.log("Database connection successful")
+)
+.catch(e =>
+    console.log("Database connection error: " + e)
 )
 
 imageRoutes.route('/get').get((req, res) => 
@@ -71,6 +77,6 @@ imageRoutes.route('/delete/:id').delete((req, res) =>
 
 app.use('/images', imageRoutes)
 
-app.listen(config.BE_PORT, () => 
-    console.log("Server is running on Port: " + config.BE_PORT)
+app.listen(process.env.BE_PORT, () => 
+    console.log("Server is running on Port: " + process.env.BE_PORT)
 )

@@ -1,0 +1,9 @@
+.Popup {
+    top: 100px;
+    left: 50%;
+    transform: translateX(-50%);
+    border: 1px solid black;
+    position: fixed;
+
+    width: 300px;
+}

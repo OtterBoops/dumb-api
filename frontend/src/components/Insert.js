@@ -1,10 +1,13 @@
 import React from "react"
 import axios from 'axios'
 
-import config from '../config/config.js'
 import Content from '../components/containers/Content'
 
-const BE_URL = config.BE_ADDRESS + ":" + config.BE_PORT + "/images"
+require('dotenv').config({
+    path: '../config/.env'
+})
+
+const BE_URL = process.env.BE_ADDRESS + ":" + process.env.BE_PORT + "/images"
 
 export default class Insert extends Content {
     constructor (props) {

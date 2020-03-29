@@ -1,9 +1,0 @@
-const config = {
-    PROJECT_ROOT: "",
-
-    DB_URL: "",
-
-    BE_PORT: ,
-}
-
-module.exports = config
