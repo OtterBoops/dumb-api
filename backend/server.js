@@ -7,11 +7,9 @@ const bodyParser = require('body-parser')
 const cors = require('cors')
 const mongoose = require('mongoose')
 
-let Image = require('./models/image.model.js')
+require('dotenv').config()
 
-require('dotenv').config({
-    path: '../config/.env'
-})
+let Image = require('./models/image.model.js')
 
 app.use(cors())
 app.use(bodyParser.json())
