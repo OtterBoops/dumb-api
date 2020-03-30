@@ -1,11 +1,10 @@
 import React from "react"
-import { Box } from "@material-ui/core"
 
 function Footer (){
     return (
-        <Box w="100%">
+        <footer className="Footer">
             footer footer
-        </Box>
+        </footer>
     )
 }
 

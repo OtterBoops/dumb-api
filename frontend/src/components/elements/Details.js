@@ -1,8 +1,6 @@
 import React from "react"
 import Button from '@material-ui/core/Button'
 
-import "../styles/containers/Popup.scss"
-
 const Details = props => (
     <div className="Popup">
         <Button onClick={() => props.onClose()}>X</Button>

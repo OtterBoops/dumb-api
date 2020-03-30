@@ -1,13 +1,12 @@
-import React from "react"
+import React, { Component } from "react"
 import axios from 'axios'
-
-import Content from '../components/containers/Content'
+import { Box } from "@material-ui/core"
 
 import * as Constants from '../constants/constants'
 
 const BE_URL = Constants.BE_ADDRESS + ":" + Constants.BE_PORT + "/images"
 
-export default class Insert extends Content {
+export default class Insert extends Component {
     constructor (props) {
         super(props)
 
@@ -39,7 +38,7 @@ export default class Insert extends Content {
 
     render() {
         return(
-            <Content>
+            <Box width="70%" boxShadow="2" m="auto" mt={5}>
                 <form onSubmit={this.onSubmit}>
                     <div>
                         <label>Thonk: </label>
@@ -50,7 +49,7 @@ export default class Insert extends Content {
                         <input type="submit" value="Insert"/>
                     </div>
                 </form>
-            </Content>
+            </Box>
         )
     }
 }

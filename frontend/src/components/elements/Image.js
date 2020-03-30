@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import Details from '../Details'
+import Details from './Details'
 import Button from '@material-ui/core/Button'
 
 export default class Image extends Component {

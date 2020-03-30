@@ -1,13 +1,13 @@
-import React from "react"
+import React, { Component } from "react"
 import axios from "axios"
+import { Box } from "@material-ui/core"
 
 import Image from './elements/Image'
-import Content from '../components/containers/Content'
 
 import * as Constants from '../constants/constants'
 
 const BE_URL = Constants.BE_ADDRESS + ":" + Constants.BE_PORT + "/images"
-export default class List extends Content {
+export default class List extends Component {
 
     constructor(props) {
         super(props)
@@ -49,11 +49,11 @@ export default class List extends Content {
 
     render() {
         return(
-            <Content>
+            <Box width="70%" boxShadow="5" className="Content">
                 {this.state.images.map((image, i) => 
                     <Image className="Image" image={image} key={i} onInspect={this.handleInspect} />
                 )}
-            </Content>
+            </Box>
         )
     }
 }

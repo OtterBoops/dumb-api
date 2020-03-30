@@ -1,14 +1,13 @@
-import React from "react"
+import React, { Component } from "react"
+import { Box } from "@material-ui/core"
 
-import Content from '../components/containers/Content'
-
-export default class Home extends Content {
+export default class Home extends Component{
     
     render() {
         return(
-            <Content>
+            <Box boxShadow="5" className="Content" width={"50%"}>
                 Home
-            </Content>
+            </Box>
         )
     }
 }
