@@ -39,5 +39,3 @@ export default class Image extends Component {
     //         {this.state.popup ? <Details onClose={this.handleClose} onDelete={this.handleDelete} /> : null}
     //     </div>
     // )
-    
-    // export default Image

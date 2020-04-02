@@ -1,13 +1,12 @@
-import React, { Component } from "react"
-import { Box } from "@material-ui/core"
-
+import React, { Component } from 'react'
+import AnimatedRoute from './animated/AnimatedRoute'
 export default class Home extends Component{
     
     render() {
         return(
-            <Box boxShadow="5" className="Content" width={"50%"}>
+            <AnimatedRoute>
                 Home
-            </Box>
+            </AnimatedRoute>
         )
     }
 }

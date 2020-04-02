@@ -1,10 +1,10 @@
 import React, { Component } from "react"
 import axios from 'axios'
-import { Box } from "@material-ui/core"
+import AnimatedRoute from './animated/AnimatedRoute'
 
-import * as Constants from '../constants/constants'
+import * as Constants from '../constants/Backend'
 
-const BE_URL = Constants.BE_ADDRESS + ":" + Constants.BE_PORT + "/images"
+const BE_URL = Constants.BE_ADDRESS + ":" + Constants.BE_PORT + "/api"
 
 export default class Insert extends Component {
     constructor (props) {
@@ -27,9 +27,9 @@ export default class Insert extends Component {
             imageName: this.state.imageName
         }
 
-        axios.post(BE_URL+ '/insert/', newImage)
-            .then(res => console.log(res.data))
-            .catch(res => console.log(res))
+        axios.post(BE_URL+ '/images/insert/', newImage)
+        .then(res => console.log(res.data))
+        .catch(res => console.log(res))
 
         this.setState({
             imageName: '',
@@ -38,7 +38,7 @@ export default class Insert extends Component {
 
     render() {
         return(
-            <Box width="70%" boxShadow="2" m="auto" mt={5}>
+            <AnimatedRoute>
                 <form onSubmit={this.onSubmit}>
                     <div>
                         <label>Thonk: </label>
@@ -49,7 +49,7 @@ export default class Insert extends Component {
                         <input type="submit" value="Insert"/>
                     </div>
                 </form>
-            </Box>
+            </AnimatedRoute>
         )
     }
 }

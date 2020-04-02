@@ -1,12 +1,12 @@
 import React, { Component } from "react"
 import axios from "axios"
-import { Box } from "@material-ui/core"
+import AnimatedRoute from './animated/AnimatedRoute'
 
 import Image from './elements/Image'
 
-import * as Constants from '../constants/constants'
+import * as Constants from '../constants/Backend'
 
-const BE_URL = Constants.BE_ADDRESS + ":" + Constants.BE_PORT + "/images"
+const BE_URL = Constants.BE_ADDRESS + ":" + Constants.BE_PORT + "/api"
 export default class List extends Component {
 
     constructor(props) {
@@ -18,7 +18,7 @@ export default class List extends Component {
     }
 
     componentDidMount() {
-        axios.get(BE_URL + '/get/')
+        axios.get(BE_URL + '/images/get/')
             .then(response => 
                 this.setState({ images: response.data })
             )
@@ -28,7 +28,7 @@ export default class List extends Component {
     }
 
     handleInspect = (id) => {
-        axios.get(BE_URL + '/get/' + id)
+        axios.get(BE_URL + '/images/get/' + id)
         .then(res => {
             console.log(res.data);
         })
@@ -49,11 +49,11 @@ export default class List extends Component {
 
     render() {
         return(
-            <Box width="70%" boxShadow="5" className="Content">
+            <AnimatedRoute>
                 {this.state.images.map((image, i) => 
                     <Image className="Image" image={image} key={i} onInspect={this.handleInspect} />
-                )}
-            </Box>
+                    )}
+            </AnimatedRoute>
         )
     }
 }
