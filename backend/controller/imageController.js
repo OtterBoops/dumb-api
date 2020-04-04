@@ -1,3 +1,4 @@
+const multer = require('multer')
 const Image = require('../models/imageModel')
 
 exports.getAll = (req, res) => {
@@ -19,17 +20,29 @@ exports.getOne = (req, res) => {
 }
 
 exports.insert = (req, res) => {
-    let image = new Image(req.body)
+    let storage = multer.diskStorage({
+        destination: (req, file, cb) => {
+            cb(null, '../uploads')
+        },
+        filename: (req, file, cb) => {
+            cb(null, file.filename)
+        }
+    })
+
+    let upload = multer({storage: storage})
+    upload.single('file')
+
+    // let image = new Image(req.body)
     
-    image.save()
-    .then(() => 
-        res.status(200).json({
-            image: "Image added"
-        })
-    )
-    .catch(err => 
-        res.status(500).send("Error adding image: " + err)
-    )
+    // image.save()
+    // .then(() => 
+    //     res.status(200).json({
+    //         image: "Image added"
+    //     })
+    // )
+    // .catch(err => 
+    //     res.status(500).send("Error adding image: " + err)
+    // )
 }
 
 exports.delete = (req, res) => {
