@@ -11,6 +11,7 @@ import Footer from './components/Footer'
 
 import 'typeface-roboto'
 import './styles/Main.scss'
+import './styles/Scrollbar.scss'
 
 export default class Main extends Component {
   render() {

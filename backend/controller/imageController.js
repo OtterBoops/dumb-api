@@ -43,3 +43,11 @@ exports.delete = (req, res) => {
         res.status(500).send("Error deleting image: " + err)
     )
 }
+
+exports.deduplicate = (req, res) => {
+    let arr = []
+    Image.find((err, images) => 
+        err ? console.log(err) : res.send("ra")
+    )
+    console.log(arr)
+}

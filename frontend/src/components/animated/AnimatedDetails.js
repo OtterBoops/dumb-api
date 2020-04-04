@@ -1,23 +1,23 @@
 import React, { Component } from 'react'
 import { motion } from 'framer-motion'
 
-import '../../styles/Content.scss'
+import '../../styles/Popup.scss'
 
-const PageTransition = {
+const PopupTransition = {
     in: {
         opacity: 1,
-        x: 0
+        y: 0
     },
     out: {
         opacity: 0,
-        x: '-5%'
+        y: '-5%'
     }
 }
 
-export default class AnimatedRoute extends Component {
+export default class AnimatedDetails extends Component {
     render() {
         return(
-            <motion.div className="Content" variants={PageTransition} initial="out" animate="in" exit="out">
+            <motion.div className="Details" variants={PopupTransition} initial="out" animate="in" exit="out">
                 {this.props.children}
             </motion.div>
         )

@@ -5,7 +5,9 @@ export default class Home extends Component{
     render() {
         return(
             <AnimatedRoute>
-                Home
+                <div className="Home">
+                    <p>Home</p>
+                </div>
             </AnimatedRoute>
         )
     }
