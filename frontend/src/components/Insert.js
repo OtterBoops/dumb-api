@@ -5,6 +5,13 @@ import AnimatedRoute from './animated/AnimatedRoute'
 import * as Constants from '../constants/Backend'
 
 const BE_URL = Constants.BE_ADDRESS + ":" + Constants.BE_PORT + "/api"
+    
+const toBase = file => new Promise((res, rej) => {
+    const reader = new FileReader()
+    reader.readAsDataURL(file)
+    reader.onload = () => res(reader.result)
+    reader.onerror = error => rej(error)
+})
 
 export default class Insert extends Component {
     constructor (props) {
@@ -12,7 +19,7 @@ export default class Insert extends Component {
 
         this.state = {
             imageName: '',
-            imageFile: []
+            imageFile: null
         }
     }
 
@@ -24,24 +31,18 @@ export default class Insert extends Component {
     
     onChangeFile = e =>
         this.setState({
-            imageFile: e.target.files[0]
+            imageFile: e.target.files[0],
         })
-    
+
     onSubmit = e => {
         e.preventDefault()
-
-        const newImage = {
-            imageName: this.state.imageName,
-            imageFile: this.state.imageFile
-        }
-
-        // axios.post(BE_URL+ '/images/insert/', newImage)
-        // .then(res => console.log(res.data))
-        // .catch(res => console.log(res))
-
-        // this.setState({
-        //     imageName: '',
-        // })
+        const file = this.state.imageFile
+        toBase(file)
+        .then(res => 
+            axios.post(BE_URL + '/images/insert', {
+                image: res
+            })    
+        )
     }
 
     render() {
@@ -51,7 +52,11 @@ export default class Insert extends Component {
                     <div>
                         <label>Thonk: </label>
                         <input type="text" value={this.state.imageName} onChange={this.onChangeName}/>
-                        <input type="file" onChange={this.onChangeFile} enctype="multipart/form-data"/>
+                        <input
+                            type="file"
+                            name="image"
+                            onChange={this.onChangeFile}
+                        />
                     </div>
 
                     <div>

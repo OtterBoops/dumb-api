@@ -47,7 +47,6 @@ export default class ScrollTop extends Component {
     }
 
     render() {
-        console.log(this.state)
         return(
             <>
                 {this.state.visible && <motion.div className="ScrollTop" variants={ScrollTransition} initial="hidden" animate="visible" exit="hidden">

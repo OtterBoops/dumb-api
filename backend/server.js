@@ -4,7 +4,7 @@ const app = express()
 const bodyParser = require('body-parser')
 const cors = require('cors')
 const imageRoutes = require('./routes/imageRoutes.js')
-const swaggerUi = require('swagger-ui-express');
+const swaggerUi = require('swagger-ui-express')
 const specs = require('./swagger')
 
 require('dotenv').config()
@@ -25,9 +25,11 @@ mongoose.connect(process.env.DB_URL , {
 )
 
 app.use(cors())
-app.use(bodyParser.json())
+app.use(express.json({limit: '25MB'}))
+app.use(bodyParser.urlencoded({ extended: true, limit: '25MB'}))
+app.use(bodyParser.raw({limit: '25MB'}))
 app.use('/api/images', imageRoutes)
-app.use('/swagger', swaggerUi.serve, swaggerUi.setup(specs.default));
+// app.use('/swagger', swaggerUi.serve, swaggerUi.setup(specs.default))
 
 app.listen(process.env.BE_PORT, () => 
     console.log("Server is running on Port: " + process.env.BE_PORT)
