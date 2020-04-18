@@ -1,6 +1,9 @@
-const fs = require('fs')
-const crypto = require('crypto')
+// const fs = require('fs')
+// const crypto = require('crypto')
 const Image = require('../models/imageModel')
+
+checkExtension = (extension) => 
+    extension.match(/(jpg|jpeg|png)$/i) ? true : false
 
 exports.getAll = (req, res) =>
     Image.find((err, images) => 
@@ -19,13 +22,30 @@ exports.getOne = (req, res) =>
     )
 
 exports.insert = (req, res) => {
-    let request = JSON.stringify(req.body.image)
-    let randname = crypto.randomBytes(10).toString('hex')
-    let extension = request.split(';')[0].split('/')[1];
-    let b64 = request.split(',').pop().replace("\"", "")
-    fs.writeFile('./upload/' + randname + '.' + extension, b64, {encoding: 'base64'}, (err) => {
-        err ? console.log(err) : console.log("good shit")
+    let imageType = req.body.type.split('/')[1]
+    
+    if (!checkExtension(imageType)) {
+        res.status(415).json({
+            status: "Invalid extension"
+        })
+        return
+    }
+
+    let image = new Image({
+        imageName: req.body.name,
+        imageSize: req.body.size,
+        imageType,
+        lastModified: req.body.lastModified,
+        imageB64: req.body.imageData.split(',').pop().replace("\"", "")
     })
+
+    image.save()
+    .then(
+        res.status(200).json({status: "Image saved" })
+    )
+    .catch(err => 
+        res.status(500).json({status: "Error uploading image: " + err})
+    )
 }
 
 exports.delete = (req, res) =>
@@ -39,10 +59,8 @@ exports.delete = (req, res) =>
         res.status(500).send("Error deleting image: " + err)
     )
 
-exports.deduplicate = (req, res) => {
-    let arr = []
-    Image.find((err, images) => 
-        err ? console.log(err) : res.send("ra")
+exports.count = (req, res) =>
+    Image.countDocuments({})
+    .then(count => 
+        res.json(count)
     )
-    console.log(arr)
-}

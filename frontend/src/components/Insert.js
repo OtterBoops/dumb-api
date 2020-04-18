@@ -18,31 +18,42 @@ export default class Insert extends Component {
         super(props)
 
         this.state = {
-            imageName: '',
+            givenName: '',
             imageFile: null
         }
     }
 
     onChangeName = e => 
         this.setState({
-            imageName: e.target.value,
+            givenName: e.target.value,
 
         })
     
-    onChangeFile = e =>
+    onChangeFile = e => {
         this.setState({
             imageFile: e.target.files[0],
         })
+}
 
     onSubmit = e => {
         e.preventDefault()
+
+        
         const file = this.state.imageFile
         toBase(file)
         .then(res => 
             axios.post(BE_URL + '/images/insert', {
-                image: res
-            })    
+                name: file.name,
+                size: file.size,
+                lastModified: file.lastModified,
+                type: file.type,
+                imageData: res
+            })
         )
+    }
+
+    Debug = e => {
+        console.log(this.state.imageFile)
     }
 
     render() {
@@ -50,11 +61,10 @@ export default class Insert extends Component {
             <AnimatedRoute>
                 <form onSubmit={this.onSubmit}>
                     <div>
-                        <label>Thonk: </label>
-                        <input type="text" value={this.state.imageName} onChange={this.onChangeName}/>
                         <input
                             type="file"
                             name="image"
+                            accept="image/*"
                             onChange={this.onChangeFile}
                         />
                     </div>
@@ -63,6 +73,7 @@ export default class Insert extends Component {
                         <input type="submit" value="Upload"/>
                     </div>
                 </form>
+                <button onClick={this.Debug}>Debug</button>
             </AnimatedRoute>
         )
     }
