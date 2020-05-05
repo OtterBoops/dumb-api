@@ -28,6 +28,7 @@ app.use(cors())
 app.use(express.json({limit: '25MB'}))
 app.use(bodyParser.urlencoded({ extended: true, limit: '25MB'}))
 app.use(bodyParser.raw({limit: '25MB'}))
+app.use('/upload', express.static("upload"))
 app.use('/api/images', imageRoutes)
 // app.use('/swagger', swaggerUi.serve, swaggerUi.setup(specs.default))
 

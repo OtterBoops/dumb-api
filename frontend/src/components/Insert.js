@@ -4,7 +4,7 @@ import AnimatedRoute from './animated/AnimatedRoute'
 
 import * as Constants from '../constants/Backend'
 
-const BE_URL = Constants.BE_ADDRESS + ":" + Constants.BE_PORT + "/api"
+const BE_URL = Constants.BE_ADDRESS + ":" + Constants.BE_PORT
     
 const toBase = file => new Promise((res, rej) => {
     const reader = new FileReader()
@@ -42,7 +42,7 @@ export default class Insert extends Component {
         const file = this.state.imageFile
         toBase(file)
         .then(res => 
-            axios.post(BE_URL + '/images/insert', {
+            axios.post(BE_URL + '/api/images/insert', {
                 name: file.name,
                 size: file.size,
                 lastModified: file.lastModified,

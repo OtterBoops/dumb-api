@@ -1,5 +1,5 @@
-// const fs = require('fs')
-// const crypto = require('crypto')
+const fs = require('fs')
+const crypto = require('crypto')
 const Image = require('../models/imageModel')
 
 checkExtension = (extension) => 
@@ -23,6 +23,8 @@ exports.getOne = (req, res) =>
 
 exports.insert = (req, res) => {
     let imageType = req.body.type.split('/')[1]
+    let imageB64 = req.body.imageData.split(',').pop().replace("\"", "")
+    let randomName = crypto.randomBytes(10).toString('hex')
     
     if (!checkExtension(imageType)) {
         res.status(415).json({
@@ -31,12 +33,15 @@ exports.insert = (req, res) => {
         return
     }
 
+    let writeStream = fs.createWriteStream("upload/" + randomName + '.' + imageType)
+    writeStream.write(imageB64, 'base64')
+
     let image = new Image({
         imageName: req.body.name,
+        randomName: randomName + "." + imageType,
         imageSize: req.body.size,
         imageType,
         lastModified: req.body.lastModified,
-        imageB64: req.body.imageData.split(',').pop().replace("\"", "")
     })
 
     image.save()

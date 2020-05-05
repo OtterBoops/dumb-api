@@ -7,7 +7,7 @@ import Image from './Image'
 
 import * as Constants from '../constants/Backend'
 
-const BE_URL = Constants.BE_ADDRESS + ":" + Constants.BE_PORT + "/api"
+const BE_URL = Constants.BE_ADDRESS + ":" + Constants.BE_PORT
 export default class List extends Component {
 
     state = {
@@ -15,7 +15,7 @@ export default class List extends Component {
     }
 
     componentDidMount() {
-        axios.get(BE_URL + '/images/get/')
+        axios.get(BE_URL + '/api/images/get/')
         .then(response => { 
             this.setState({
                 images: [
@@ -29,7 +29,6 @@ export default class List extends Component {
         .catch(err => 
             console.log(err)
         )
-
     }
 
     handlePopup = (id) => 
@@ -41,8 +40,12 @@ export default class List extends Component {
             )
         })
 
+    isEmpty = () => { 
+        return (this.state.images.length === 0) ? true :false
+    }
+
     handleDelete = (id) => 
-        axios.delete(BE_URL + '/images/delete/' + id)
+        axios.delete(BE_URL + '/api/images/delete/' + id)
         .then(() => 
             this.setState({images: this.state.images.filter(image => image._id !== id)})
         )
@@ -55,8 +58,9 @@ export default class List extends Component {
             <AnimatedRoute>
                 <div className="List">
                     {this.state.images.map((image, i) => 
-                        <Image image={image} key={i} handleDelete={this.handleDelete} handlePopup={this.handlePopup}/>
+                        <Image image={image} key={i} handleDelete={this.handleDelete} handlePopup={this.handlePopup}/>                        
                     )}
+                    {this.isEmpty() ?  <div>No images to show.</div> : null}
                 </div>
                 <ScrollTop />
             </AnimatedRoute>
