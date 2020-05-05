@@ -19,7 +19,7 @@ export default class List extends Component {
         .then(response => { 
             this.setState({
                 images: [
-                    ...response.data.map(image => ({
+                    ...response.data.data.map(image => ({
                         ...image,
                         popup: false
                     }))
