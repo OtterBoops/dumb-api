@@ -53,16 +53,17 @@ exports.insert = (req, res) => {
     )
 }
 
-exports.delete = (req, res) =>
-    Image.findByIdAndRemove(req.params.id)
-    .then(() => 
-        res.status(200).json({
-            image: "Image deleted"
+exports.delete = (req, res) => {
+    // let test = "5eaf01da3a0ff7423cfbfa36"
+
+    Image.findById(test, 'randomName', {lean: true})
+    .then(image => {
+        if (!image) return res.status(404).json({
+            status: "error",
+            message: "Could not find image ID"
         })
-    )
-    .catch(err =>
-        res.status(500).send("Error deleting image: " + err)
-    )
+    })
+}
 
 exports.count = (req, res) =>
     Image.countDocuments({})

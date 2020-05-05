@@ -1,6 +1,5 @@
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema
-const AutoIncrement = require('mongoose-sequence')(mongoose)
 
 const imageSchema = new Schema({
     givenName: {
@@ -8,6 +7,10 @@ const imageSchema = new Schema({
     },
 
     imageName: {
+        type: String
+    },
+    
+    randomName: {
         type: String
     },
 
@@ -21,10 +24,7 @@ const imageSchema = new Schema({
 
     lastModified: {
         type: Number
-    },
-
-    imageB64: {
-        type: String
     }
+
 })
 module.exports = mongoose.model('Image', imageSchema)
