@@ -4,8 +4,6 @@ const app = express()
 const bodyParser = require('body-parser')
 const cors = require('cors')
 const imageRoutes = require('./routes/imageRoutes.js')
-const swaggerUi = require('swagger-ui-express')
-const specs = require('./swagger')
 
 require('dotenv').config()
 
@@ -30,7 +28,6 @@ app.use(bodyParser.urlencoded({ extended: true, limit: '25MB'}))
 app.use(bodyParser.raw({limit: '25MB'}))
 app.use('/upload', express.static("upload"))
 app.use('/api/images', imageRoutes)
-// app.use('/swagger', swaggerUi.serve, swaggerUi.setup(specs.default))
 
 app.listen(process.env.BE_PORT, () => 
     console.log("Server is running on Port: " + process.env.BE_PORT)
